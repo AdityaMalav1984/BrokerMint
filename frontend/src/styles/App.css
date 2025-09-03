@@ -1,0 +1,79 @@
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.risk-badge {
+  font-size: 0.8em;
+  padding: 0.4em 0.8em;
+  border-radius: 20px;
+}
+
+.risk-low {
+  background-color: #28a745;
+  color: white;
+}
+
+.risk-medium {
+  background-color: #ffc107;
+  color: black;
+}
+
+.risk-high {
+  background-color: #fd7e14;
+  color: white;
+}
+
+.risk-critical {
+  background-color: #dc3545;
+  color: white;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.alert-item {
+  border-left: 4px solid;
+  border-radius: 4px;
+}
+
+.alert-high {
+  border-left-color: #dc3545;
+}
+
+.alert-medium {
+  border-left-color: #ffc107;
+}
+
+.alert-low {
+  border-left-color: #28a745;
+}
