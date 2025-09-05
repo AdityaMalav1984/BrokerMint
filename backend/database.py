@@ -67,6 +67,18 @@ def init_database():
             FOREIGN KEY (user_id) REFERENCES users (id)
         )
     ''')
+
+    # In the init_database() function, add this table creation:
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS reports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            report_type TEXT NOT NULL,
+            content TEXT,
+            generated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+    ''')
     
     password = "admin"
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')

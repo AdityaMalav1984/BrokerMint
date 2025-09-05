@@ -5,11 +5,13 @@ import { complianceAPI } from '../services/api';
 const eKYCVerification = () => {
   const [formData, setFormData] = useState({
     document_type: 'aadhaar',
-    document_data: {}
+    document_data: { number: '' }
   });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  console.log('eKYC Component rendered'); // Debug log
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +19,12 @@ const eKYCVerification = () => {
     setError('');
     
     try {
+      console.log('Submitting:', formData); // Debug log
       const response = await complianceAPI.verifyIdentity(formData);
+      console.log('Response:', response.data); // Debug log
       setResult(response.data);
     } catch (err) {
+      console.error('Error:', err); // Debug log
       setError(err.response?.data?.error || 'Verification failed');
     } finally {
       setLoading(false);
@@ -27,10 +32,18 @@ const eKYCVerification = () => {
   };
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    if (name === 'document_number') {
+      setFormData({
+        ...formData,
+        document_data: { number: value }
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   return (
@@ -69,11 +82,10 @@ const eKYCVerification = () => {
                   <Form.Label>Document Number</Form.Label>
                   <Form.Control
                     type="text"
+                    name="document_number"
                     placeholder="Enter document number"
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      document_data: { number: e.target.value }
-                    })}
+                    value={formData.document_data.number}
+                    onChange={handleInputChange}
                   />
                 </Form.Group>
 
